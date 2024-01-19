@@ -1,6 +1,9 @@
 
 ------------------------Библиотеки-----------------------------
-local encoding = require("encoding")
+
+local encoding = require 'encoding' -- подключаем библиотеку для работы с разными кодировками
+encoding.default = 'CP1251' -- задаём кодировку по умолчанию
+local u8 = encoding.UTF8 -- это позволит нам писать задавать названия/текст на кириллице
 local sampev = require("lib.samp.events")
 local request = require("requests")
 local imgui = require("mimgui")
