@@ -81,7 +81,11 @@ imgui.OnFrame(function() return WinState[0] end, function(player)
   imgui.BeginChild('Tabs', imgui.ImVec2(-1, -1))
 
   if CurrentTab == 3 then
-      
+            
+      if imgui.Button(u8"что то") then
+ sampAddChatMessage(u8"Дратути")
+end
+
       if imgui.Button(u8"Перезагрузить Скрипт") then
           lua_thread.create(function() wait(5) thisScript():reload() end)
       end
