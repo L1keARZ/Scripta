@@ -1,9 +1,9 @@
 
-------------------------Р‘РёР±Р»РёРѕС‚РµРєРё-----------------------------
+------------------------Библиотеки-----------------------------
 
-local encoding = require 'encoding' -- РїРѕРґРєР»СЋС‡Р°РµРј Р±РёР±Р»РёРѕС‚РµРєСѓ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ СЂР°Р·РЅС‹РјРё РєРѕРґРёСЂРѕРІРєР°РјРё
-encoding.default = 'CP1251' -- Р·Р°РґР°С‘Рј РєРѕРґРёСЂРѕРІРєСѓ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
-local u8 = encoding.UTF8 -- СЌС‚Рѕ РїРѕР·РІРѕР»РёС‚ РЅР°Рј РїРёСЃР°С‚СЊ Р·Р°РґР°РІР°С‚СЊ РЅР°Р·РІР°РЅРёСЏ/С‚РµРєСЃС‚ РЅР° РєРёСЂРёР»Р»РёС†Рµ
+local encoding = require 'encoding' -- подключаем библиотеку для работы с разными кодировками
+encoding.default = 'CP1251' -- задаём кодировку по умолчанию
+local u8 = encoding.UTF8 -- это позволит нам писать задавать названия/текст на кириллице
 local sampev = require("lib.samp.events")
 local request = require("requests")
 local imgui = require("mimgui")
@@ -15,12 +15,12 @@ local json = require("cjson")
 
 function sampev.onSendSpawn()
     sampSendChat("/stats")
-    sampAddChatMessage("[UxyOy AutoSchool Helper]: {FFFFFF}РЎРєСЂРёРїС‚ СѓСЃРїРµС€РЅРѕ Р·Р°РіСЂСѓР·РёР»СЃСЏ", 9109759)
-    sampAddChatMessage("[UxyOy AutoSchool Helper]: {FFFFFF}РђРІС‚РѕСЂС‹:t.me/UxyOy", 9109759)
-    sampAddChatMessage("[UxyOy AutoSchool Helper]: {FFFFFF}Р§С‚РѕР±С‹ РїРѕСЃРјРѕС‚СЂРµС‚СЊ РєРѕРјРјР°РЅРґС‹,РІРІРµРґРёС‚Рµ /helper and /helpers", 9109759)
+    sampAddChatMessage("[UxyOy AutoSchool Helper]: {FFFFFF}Скрипт успешно загрузился", 9109759)
+    sampAddChatMessage("[UxyOy AutoSchool Helper]: {FFFFFF}Авторы:t.me/UxyOy", 9109759)
+    sampAddChatMessage("[UxyOy AutoSchool Helper]: {FFFFFF}Чтобы посмотреть комманды,введите /helper and /helpers", 9109759)
 end
 
---РџР•Р Р•РњР•РќРќР«Р•--
+--ПЕРЕМЕННЫЕ--
 local gta = ffi.load("GTASA")
 local CurrentTab = 0
 local fa = faicons
@@ -41,17 +41,17 @@ EXPORTS = {
 
 
 
---РћР‘РќРћР’Р›Р•РќРР•--
+--ОБНОВЛЕНИЕ--
 if not imgui.update then
     imgui.update = {
-        needupdate = false, updateText = u8"РќР°Р¶РјРёС‚Рµ РЅР° \"РџСЂРѕРІРµСЂРёС‚СЊ РѕР±РЅРѕРІР»РµРЅРёРµ\"", version = "1.3.9"
+        needupdate = false, updateText = u8"Нажмите на \"Проверить обновление\"", version = "1.3.8"
 }
 end
 ---------------------------
 
 
 
---СЂРµРіРёСЃС‚СЂР°С†РёСЏ РєРѕРјР°РЅРґ--
+--регистрация команд--
 function main()
     while not isSampAvailable() do wait(100) end
      sampRegisterChatCommand("ob", function()
@@ -62,7 +62,7 @@ end
 
 
 
---РѕС‚СЂРёСЃРѕРІРєР° РјРёРјРіСѓРё
+--отрисовка мимгуи
 local newframe = (
 imgui.OnFrame(function() return WinState[0] end, function(player)
   imgui.SetNextWindowSize(imgui.ImVec2(490, 275))
@@ -70,9 +70,9 @@ imgui.OnFrame(function() return WinState[0] end, function(player)
 
 ------------------------------------------------
   imgui.BeginChild('Button', imgui.ImVec2(120, -1))
---СЃРѕР·РґР°РЅРёРµ РєРЅРѕРїРѕРє--
+--создание кнопок--
   
-  if imgui.Button(u8 "РќР°СЃС‚СЂРѕР№РєРё", imgui.ImVec2(118, 28)) then
+  if imgui.Button(u8 "Настройки", imgui.ImVec2(118, 28)) then
       CurrentTab = 3
   end
   imgui.EndChild()
@@ -82,22 +82,22 @@ imgui.OnFrame(function() return WinState[0] end, function(player)
 
   if CurrentTab == 3 then
       
-      if imgui.Button(u8"РџРµСЂРµР·Р°РіСЂСѓР·РёС‚СЊ РЎРєСЂРёРїС‚") then
+      if imgui.Button(u8"Перезагрузить Скрипт") then
           lua_thread.create(function() wait(5) thisScript():reload() end)
       end
       imgui.ShowCursor = false
-      if imgui.IsItemHovered() then imgui.SetTooltip(u8"РљР»РёРєРЅРёС‚Рµ Р›РљРњ, С‡С‚РѕР±С‹ РїРµСЂРµР·Р°РіСЂСѓР·РёС‚СЊ СЃРєСЂРёРїС‚")
+      if imgui.IsItemHovered() then imgui.SetTooltip(u8"Кликните ЛКМ, чтобы перезагрузить скрипт")
       end
       imgui.SameLine()
-      if imgui.Button(u8"Р’С‹РіСЂСѓР·РёС‚СЊ РЎРєСЂРёРїС‚") then
+      if imgui.Button(u8"Выгрузить Скрипт") then
           lua_thread.create(function() wait(1) thisScript():unload() end)
       imgui.ShowCursor = false
       end
       
       if imgui.update.needupdate then
-          local centered_x = (imgui.GetWindowWidth() - imgui.CalcTextSize(u8"РћР±РЅРѕРІРёС‚СЊСЃСЏ").x) / 2
+          local centered_x = (imgui.GetWindowWidth() - imgui.CalcTextSize(u8"Обновиться").x) / 2
           imgui.SetCursorPosX(centered_x)
-          if imgui.Button(u8"РћР±РЅРѕРІРёС‚СЊСЃСЏ") then
+          if imgui.Button(u8"Обновиться") then
               local response = request.get("https://raw.githubusercontent.com/L1keARZ/Scripta/main/Obnova.lua")
                    if response.status_code == 200 then
                       local file = io.open(thisScript().filename, "wb")
@@ -106,30 +106,30 @@ imgui.OnFrame(function() return WinState[0] end, function(player)
                              file:close()
                              thisScript():reload()
                         else
-                            sampAddChatMessage("РЈРїСЃ, РѕС€РёР±РѕС‡РєР°, СЃРѕРѕР±С‰Рё Р°РІС‚РѕСЂСѓ СЃРєСЂРёРїС‚Р°, РѕРЅРѕ РІ РЅР°СЃС‚СЂРѕР№РєР°С…", -1)
+                            sampAddChatMessage("Упс, ошибочка, сообщи автору скрипта, оно в настройках", -1)
                        end
                 end
           end
       else
-          local centered_x = (imgui.GetWindowWidth() - imgui.CalcTextSize(u8"РџСЂРѕРІРµСЂРёС‚СЊ РѕР±РЅРѕРІР»РµРЅРёРµ").x) / 2
+          local centered_x = (imgui.GetWindowWidth() - imgui.CalcTextSize(u8"Проверить обновление").x) / 2
           imgui.SetCursorPosX(centered_x)
-              if imgui.Button(u8"РџСЂРѕРІРµСЂРёС‚СЊ РѕР±РЅРѕРІР»РµРЅРёРµ") then
+              if imgui.Button(u8"Проверить обновление") then
                   local response = request.get("https://raw.githubusercontent.com/L1keARZ/Scripta/main/Test.json")
                       if response.status_code == 200 then
-                          local data = json.decode(response.text) -- РџСЂРµРґРїРѕР»Р°РіР°РµРј, С‡С‚Рѕ РµСЃС‚СЊ Р±РёР±Р»РёРѕС‚РµРєР° JSON
+                          local data = json.decode(response.text) -- Предполагаем, что есть библиотека JSON
                               if data and data.version and data.version ~= imgui.update.version then
                                   imgui.update.needupdate = true
-                                  imgui.update.updateText = u8"РќР°Р№РґРµРЅРѕ РѕР±РЅРѕРІР»РµРЅРёРµ РЅР° РІРµСЂСЃРёСЋ " .. data.version
+                                  imgui.update.updateText = u8"Найдено обновление на версию " .. data.version
                                   else
-                                  imgui.update.updateText = u8"РћР±РЅРѕРІР»РµРЅРёР№ РЅРµ РЅР°Р№РґРµРЅРѕ"
+                                  imgui.update.updateText = u8"Обновлений не найдено"
                               end
                       else
-                      imgui.update.updateText = u8"РћС€РёР±РєР° " .. tostring(response.status_code)
+                      imgui.update.updateText = u8"Ошибка " .. tostring(response.status_code)
                       end
                   end
               end
 
--- РЈРІРµРґРѕРјР»РµРЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РѕР± РѕР±РЅРѕРІР»РµРЅРёСЏС…
+-- Уведомление пользователя об обновлениях
   if imgui.update.updateText ~= "" then
       imgui.Separator()
       local updateTextWidth = imgui.CalcTextSize(imgui.update.updateText).x
