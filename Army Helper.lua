@@ -13,12 +13,6 @@ local ffi = require('ffi')
 local json = require('cjson')
 ------------------------------------------
 
-function sampev.onSendSpawn()
-    sampSendChat('/stats')
-    sampAddChatMessage('[ Army Helper]: {FFFFFF}Скрипт успешно загрузился', 9109759)
-    sampAddChatMessage('[ Army Helper]: {FFFFFF}Чтобы посмотреть комманды,введите /army', 9109759)
-end
-
 --ПЕРЕМЕННЫЕ--
 local gta = ffi.load('GTASA')
 local CurrentTab = 1
@@ -43,7 +37,7 @@ EXPORTS = {
 --ОБНОВЛЕНИЕ--
 if not imgui.update then
     imgui.update = {
-        needupdate = false, updateText = u8'Нажмите на \'Проверить обновление\'', version = '1.0'
+        needupdate = false, updateText = u8'Нажмите на \'Проверить обновление\'', version = '1.1'
 }
 end
 ---------------------------
@@ -56,7 +50,7 @@ function main()
      sampRegisterChatCommand('army', function()
          ArmyGLmenu[0] = not ArmyGLmenu[0]
      end)
-     sampRegisterChatCommand('mask', cmd_mask) 
+     sampRegisterChatCommand('mask', mask) 
      sampRegisterChatCommand('bon', body_on) 
      sampRegisterChatCommand('boff', body_off) 
      while true do
@@ -64,27 +58,27 @@ function main()
         if lastgun ~= getCurrentCharWeapon(PLAYER_PED) then
             local gun = getCurrentCharWeapon(PLAYER_PED)
             if gun == 3 then
-                sampSendChat("/me достал дубинку с поясного держателя")
+                sampSendChat('/me достал дубинку с поясного держателя')
             elseif gun == 23 then
-                sampSendChat("/me достал тайзер с кобуры, убрал предохранитель")
+                sampSendChat('/me достал тайзер с кобуры, убрал предохранитель')
             elseif gun == 24 then
-                sampSendChat("/me достал Desert Eagle с кобуры, убрал предохранитель")
+                sampSendChat('/me достал Desert Eagle с кобуры, убрал предохранитель')
             elseif gun == 25 then
-                sampSendChat("/me достал чехол со спины, взял дробовик и убрал предохранитель")
+                sampSendChat('/me достал чехол со спины, взял дробовик и убрал предохранитель')
             elseif gun == 26 then
-                sampSendChat("/me резким движением обоих рук, снял военный рюкзак с плеч и достал Обрезы")
+                sampSendChat('/me резким движением обоих рук, снял военный рюкзак с плеч и достал Обрезы')
             elseif gun == 28 then
-                sampSendChat("/me резким движением обоих рук, снял военный рюкзак с плеч и достал УЗИ")
+                sampSendChat('/me резким движением обоих рук, снял военный рюкзак с плеч и достал УЗИ')
             elseif gun == 29 then
-                sampSendChat("/me достал чехол со спины, взял МП5 и убрал предохранитель")
+                sampSendChat('/me достал чехол со спины, взял МП5 и убрал предохранитель')
             elseif gun == 31 then
-                sampSendChat("/me достал карабин М4 со спины")
+                sampSendChat('/me достал карабин М4 со спины')
             elseif gun == 33 then
-                sampSendChat("/me достал винтовку без прицела из военной сумки")
+                sampSendChat('/me достал винтовку без прицела из военной сумки')
             elseif gun == 34 then
-                sampSendChat("/me достал Снайперскую винтовку с военной сумки")
+                sampSendChat('/me достал Снайперскую винтовку с военной сумки')
             elseif gun == 0 then
-                sampSendChat("/me поставил предохранитель, убрал оружие")
+                sampSendChat('/me поставил предохранитель, убрал оружие')
             end
             lastgun = gun
         end
@@ -116,72 +110,72 @@ if imgui.BeginChild('Name', imgui.ImVec2(-1, -1), true) then
                       if imgui.CollapsingHeader(u8'Для отчётов') then
               if imgui.Button(fa('user_police') .. u8' Починка рации', imgui.ImVec2(-1, 35)) then
               lua_thread.create(function()
-		sampSendChat("/do На столе лежит неисправная рация.")
+		sampSendChat('/do На столе лежит неисправная рация.')
 		wait(1500)
-		sampSendChat("/do В руках сумка с инструментами у..")
+		sampSendChat('/do В руках сумка с инструментами у..')
 		wait(1500)
-		sampSendChat("/me положил сумку на стол")
+		sampSendChat('/me положил сумку на стол')
 		wait(1500)
-		sampSendChat("/me перевернул рацию лицевой стороной вниз")
+		sampSendChat('/me перевернул рацию лицевой стороной вниз')
 		wait(1500)
-		sampSendChat("/me достал из сумки крестовую отвертку")
+		sampSendChat('/me достал из сумки крестовую отвертку')
 		wait(1500)
-		sampSendChat("/me открутил все шурупы и положил их в специальную баночку")
+		sampSendChat('/me открутил все шурупы и положил их в специальную баночку')
 		wait(1500)
-		sampSendChat("/me внимательно осмотрел плату")
+		sampSendChat('/me внимательно осмотрел плату')
 		wait(1500)
-		sampSendChat("/todo Все ясно, контакт отошел *радостно улыбаясь")
+		sampSendChat('/todo Все ясно, контакт отошел *радостно улыбаясь')
 		wait(1500)
-		sampSendChat("/me достал из сумки с инструментами паяльник и проволоку-припой")
+		sampSendChat('/me достал из сумки с инструментами паяльник и проволоку-припой')
 		wait(1500)
-		sampSendChat("/me воткнул паяльник в розетку")
+		sampSendChat('/me воткнул паяльник в розетку')
 		wait(1500)
-		sampSendChat("/do Через 30 секунд паяльник нагрелся.")
+		sampSendChat('/do Через 30 секунд паяльник нагрелся.')
 		wait(1500)
-		sampSendChat("/me взял оторванный контакт и проволоку-припой в правую руку")
+		sampSendChat('/me взял оторванный контакт и проволоку-припой в правую руку')
 		wait(1500)
-		sampSendChat("/me приложил контакт в место отрыва")
+		sampSendChat('/me приложил контакт в место отрыва')
 		wait(1500)
-		sampSendChat("/me расплавил кусочек проволки")
+		sampSendChat('/me расплавил кусочек проволки')
 		wait(1500)
-		sampSendChat("/do Спустя 3 секунды, расплавившаяся лужица застыла")
+		sampSendChat('/do Спустя 3 секунды, расплавившаяся лужица застыла')
 		wait(1500)
-		sampSendChat("/me выключил паяльник из розетки")
+		sampSendChat('/me выключил паяльник из розетки')
 		wait(1500)
-		sampSendChat("/me положил паяльник и проволоку обратно в сумку")
+		sampSendChat('/me положил паяльник и проволоку обратно в сумку')
 		wait(1500)
-		sampSendChat("/me нажал кнопку включения на рации")
+		sampSendChat('/me нажал кнопку включения на рации')
 		wait(1500)
-		sampSendChat("/do Рация включилась и все ее функции были готовы к работе.")
+		sampSendChat('/do Рация включилась и все ее функции были готовы к работе.')
 		wait(1500)
-		sampSendChat("/me достал из специальной баночки шурупчики и прикрутил заднюю крышку обратно")
+		sampSendChat('/me достал из специальной баночки шурупчики и прикрутил заднюю крышку обратно')
 		wait(1500)
-		sampSendChat("/me положил отвертку в сумку с инструментами")
+		sampSendChat('/me положил отвертку в сумку с инструментами')
 	end)
 end
 if imgui.Button(fa('user_police') .. u8' Починка дверной ручки', imgui.ImVec2(-1, 35)) then
         lua_thread.create(function()
-		sampSendChat("/do Старая дверная ручка треснута.")
+		sampSendChat('/do Старая дверная ручка треснута.')
 		wait(1500)
-		sampSendChat("/do Новая ручка в руках..")
+		sampSendChat('/do Новая ручка в руках..')
 		wait(1500)
-		sampSendChat("/me достал маленькую отвертку из кармана")
+		sampSendChat('/me достал маленькую отвертку из кармана')
 		wait(1500)
-		sampSendChat("/me открутил старую дверную ручку")
+		sampSendChat('/me открутил старую дверную ручку')
 	wait(1500)
-		sampSendChat("/me распечатал новую")
+		sampSendChat('/me распечатал новую')
 		wait(1500)
-		sampSendChat("/me примерил ее на месте старой")
+		sampSendChat('/me примерил ее на месте старой')
 		wait(1500)
-		sampSendChat("Хорошо вошла")
+		sampSendChat('Хорошо вошла')
 		wait(1500)
-		sampSendChat("/me закрутил новую ручку")
+		sampSendChat('/me закрутил новую ручку')
 		wait(1500)
-		sampSendChat("/me положил отвертку обратно в карман")
+		sampSendChat('/me положил отвертку обратно в карман')
 		wait(1500)
-		sampSendChat("/do Отвертка в кармане.")
+		sampSendChat('/do Отвертка в кармане.')
 		wait(1500)
-		sampSendChat("/do Новая ручка стоит на месте старой.")
+		sampSendChat('/do Новая ручка стоит на месте старой.')
 	end)
 end
 end 
@@ -189,59 +183,59 @@ end
                                             		if imgui.CollapsingHeader(u8'Сборка/разборка оружия') then
    if imgui.Button(fa('user_police') .. u8' Сборка автомата', imgui.ImVec2(-1, 35)) then
    	lua_thread.create(function()
-		sampSendChat("/me присоединил газовую трубку со ствольной накладкой")
+		sampSendChat('/me присоединил газовую трубку со ствольной накладкой')
 		wait(1500)
-		sampSendChat("/me присоединил затворную рамку с затвором к ствольной коробке")
+		sampSendChat('/me присоединил затворную рамку с затвором к ствольной коробке')
 		wait(1500)
-		sampSendChat("/me присоединил возвратный механизм")
+		sampSendChat('/me присоединил возвратный механизм')
 		wait(1500)
-		sampSendChat("/me присоединил крышку ствольной коробки")
+		sampSendChat('/me присоединил крышку ствольной коробки')
 		wait(1500)
-		sampSendChat("/me спустил курок с боевого взвода и поставил на предохранитель")
+		sampSendChat('/me спустил курок с боевого взвода и поставил на предохранитель')
 		wait(1500)
-		sampSendChat("/me присоединил дульный тормоз-компенсатор")
+		sampSendChat('/me присоединил дульный тормоз-компенсатор')
 		wait(1500)
-		sampSendChat("/me присоединил шомпол")
+		sampSendChat('/me присоединил шомпол')
 		wait(1500)
-		sampSendChat("/me вложил пенал в гнездо приклада")
+		sampSendChat('/me вложил пенал в гнездо приклада')
 		wait(1500)
-		sampSendChat("/me присоединил магазин к автомату")
+		sampSendChat('/me присоединил магазин к автомату')
 		wait(1500)
-		sampSendChat("/me положил автомат на стол")
+		sampSendChat('/me положил автомат на стол')
 		wait(1500)
-		sampSendChat("/do Автомат на столе.")
-		sampSendChat("/s Сборку завершил")
+		sampSendChat('/do Автомат на столе.')
+		sampSendChat('/s Сборку завершил')
 	end)
 end
    if imgui.Button(fa('user_police') .. u8' Разборка автомата', imgui.ImVec2(-1, 35)) then
    lua_thread.create(function()
-		sampSendChat("/do Автомат на плече.")
+		sampSendChat('/do Автомат на плече.')
 		wait(1500)
-		sampSendChat("/me снял автомат с плеча")
+		sampSendChat('/me снял автомат с плеча')
 		wait(1500)
-		sampSendChat("/me положил автомат на стол")
+		sampSendChat('/me положил автомат на стол')
 		wait(1500)
-		sampSendChat("/do Автомат на столе.")
+		sampSendChat('/do Автомат на столе.')
 		wait(1500)
-		sampSendChat("/me начинает разборку автомата")
+		sampSendChat('/me начинает разборку автомата')
 		wait(1500)
-		sampSendChat("/me отделил магазин")
+		sampSendChat('/me отделил магазин')
 		wait(1500)
-	sampSendChat("/me проверил, нет ли патрона в патроннике")
+	sampSendChat('/me проверил, нет ли патрона в патроннике')
 		wait(1500)
-		sampSendChat("/me вынул пенал с принадлежностью из гнезда приклада")
+		sampSendChat('/me вынул пенал с принадлежностью из гнезда приклада')
 		wait(1500)
-		sampSendChat("/me отделил шомпол")
+		sampSendChat('/me отделил шомпол')
 		wait(1500)
-		sampSendChat("/me отделил крышку ствольной коробки")
+		sampSendChat('/me отделил крышку ствольной коробки')
 		wait(1500)
-		sampSendChat("/me отделил возвратный механизм")
+		sampSendChat('/me отделил возвратный механизм')
 		wait(1500)
-		sampSendChat("/me отделил затворную рамку с затвором")
+		sampSendChat('/me отделил затворную рамку с затвором')
 		wait(1500)
-		sampSendChat("/me отделил газовую трубку со ствольной накладкой")
+		sampSendChat('/me отделил газовую трубку со ствольной накладкой')
 		wait(1500)
-		sampSendChat("/s Разборку завершил")
+		sampSendChat('/s Разборку завершил')
 	end)
 end
 end 
@@ -249,20 +243,20 @@ end
     end 
     
 if tab == 3 then
-imgui.TextWrapped(fa('keyboard') ..u8' Здравствуйте, спасибо за использование нашего скрипта для семей проекта "Arizona Games" ') 
+imgui.TextWrapped(fa('keyboard') ..u8' Здравствуйте, спасибо за использование нашего скрипта для  проекта "Arizona Games" ') 
 imgui.Text('') 
                       		if imgui.CollapsingHeader(u8'Автор') then
                   imgui.TextWrapped(u8'Автор: @stik_lord [Telegram]')
-      imgui.TextWrapped(u8'Версия скрипта: 1.0.0')
+      imgui.TextWrapped(u8'Версия скрипта: 1.0')
       imgui.TextWrapped(u8'Писать по проблемам, предложениям мне в [Telegram]')
       if imgui.Button(u8' Написать розрабу ') then
           gta._Z12AND_OpenLinkPKc('https://t.me/stik_lord')
       end
       end 
                             		if imgui.CollapsingHeader(u8'Команды') then
-                            imgui.TextWrapped(fa('keyboard') ..u8'1) /mask - Рп отыгровка маски')
-                            imgui.TextWrapped(fa('keyboard') ..u8'2) /bon - Рп отыгровка включения камеры')
-                            imgui.TextWrapped(fa('keyboard') ..u8'2) /boff - Рп отыгровка выключения камеры')
+                            imgui.TextWrapped(fa('keyboard') ..u8' 1) /mask - Рп отыгровка маски')
+                            imgui.TextWrapped(fa('keyboard') ..u8' 2) /bon - Рп отыгровка включения камеры')
+                            imgui.TextWrapped(fa('keyboard') ..u8' 3) /boff - Рп отыгровка выключения камеры')
                             end 
 end    
 
@@ -279,8 +273,6 @@ if tab == 2 then
       imgui.ShowCursor = false
       end
           		if imgui.CollapsingHeader(u8'Auto Update') then
-          imgui.Text('Version 1.0')
-
       if imgui.update.needupdate then
           local centered_x = (imgui.GetWindowWidth() - imgui.CalcTextSize(u8'Обновиться').x) / 2
           imgui.SetCursorPosX(centered_x)
@@ -334,38 +326,39 @@ end)
 
 function mask()
 	lua_thread.create(function()
-		sampSendChat("/do На правом плече висит сумка.")
+		sampSendChat('/do На правом плече висит сумка.')
 		wait(1500)
-		sampSendChat("/me снял сумку с плеча, расстегнул молнию сумки, и начал обшаривать её в поисках балаклавы")
+		sampSendChat('/me снял сумку с плеча, расстегнул молнию сумки, и начал обшаривать её в поисках балаклавы')
 		wait(1500)
-		sampSendChat("/me обшарив сумку, нащупал тонкую ткань, затем вытщаил её из сумки")
+		sampSendChat('/me обшарив сумку, нащупал тонкую ткань, затем вытщаил её из сумки')
 		wait(1500)
-		sampSendChat("/me расстегнул молнию, положил обратно на плечо сумку")
+		sampSendChat('/me расстегнул молнию, положил обратно на плечо сумку')
 		wait(1500)
-		sampSendChat("/do В руке балаклава чёрного цвета.")
+		sampSendChat('/do В руке балаклава чёрного цвета.')
 		wait(1500)
-		sampSendChat("/me надел на голову балаклаву")
-		sampSendChat("/mask")
+		sampSendChat('/me надел на голову балаклаву')
+		wait(1500)
+		sampSendChat('/mask')
 	end)
 end 
 
 function body_on()
 	lua_thread.create(function()
-		sampSendChat("/do На груди висит скрытая боди камера типа ''FRAPS''.")
+		sampSendChat('/do На груди висит скрытая боди камера типа "FRAPS" .')
 		wait(1500)
-		sampSendChat("/me незаметным движением руки включил боди камеру")
+		sampSendChat('/me незаметным движением руки включил боди камеру')
 		wait(1500)
-		sampSendChat("/do Боди камера включена и начала съёмку")
+		sampSendChat('/do Боди камера включена и начала съёмку')
 	end)
 end
 
 function body_off()
 	lua_thread.create(function()
-		sampSendChat("/do На груди висит скрытая боди камера типа ''FRAPS''.")
+		sampSendChat('/do На груди висит скрытая боди камера типа "FRAPS".')
 		wait(1500)
-		sampSendChat("/me незаметным движением руки выключил боди камеру")
+		sampSendChat('/me незаметным движением руки выключил боди камеру')
 		wait(1500)
-		sampSendChat("/do Боди камера выключена и закончила съёмку")
+		sampSendChat('/do Боди камера выключена и закончила съёмку')
 	end)
 end
 
