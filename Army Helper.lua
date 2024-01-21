@@ -247,7 +247,7 @@ imgui.TextWrapped(fa('keyboard') ..u8' Здравствуйте, спасибо за использование на
 imgui.Text('') 
                       		if imgui.CollapsingHeader(u8'Автор') then
                   imgui.TextWrapped(u8'Автор: @stik_lord [Telegram]')
-      imgui.TextWrapped(u8'Версия скрипта: 1.0')
+      imgui.TextWrapped(u8'Версия скрипта: 1.1')
       imgui.TextWrapped(u8'Писать по проблемам, предложениям мне в [Telegram]')
       if imgui.Button(u8' Написать розрабу ') then
           gta._Z12AND_OpenLinkPKc('https://t.me/stik_lord')
