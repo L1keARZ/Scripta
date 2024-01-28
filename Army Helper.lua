@@ -457,7 +457,7 @@ if imgui.Button(u8'Перезагрузить Скрипт') then
           local centered_x = (imgui.GetWindowWidth() - imgui.CalcTextSize(u8'Обновиться').x) / 2
           imgui.SetCursorPosX(centered_x)
           if imgui.Button(u8'Обновиться') then
-              local response = request.get('https://raw.githubusercontent.com/L1keARZ/Scripta/main/Obnova.lua')
+              local response = request.get('https://raw.githubusercontent.com/L1keARZ/Scripta/main/Army%20Helper.lua')
                    if response.status_code == 200 then
                       local file = io.open(thisScript().filename, 'wb')
                          if file then
